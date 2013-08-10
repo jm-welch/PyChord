@@ -23,12 +23,13 @@ Milestone 1: Initial functionality     - COMPLETE
 
 Milestone 2: Document tag recognition  - IN PROGRESS
   - Recognize the following tags for documents:
+    
     ```
-	{title:This Is a Title}        - short: t
+    {title:This Is a Title}        - short: t
     {subtitle: This is a Subtitle} - short: st
     {key: G}                       - short: k
     {comment: This is a comment}   - short: c
-	```
+    ```
 
 Milestone 3: Paragraph recognition
   - Only double-space paragraphs that contain chords
@@ -40,7 +41,6 @@ Milestone 4: Refactoring
   - Song class
   - Cleanup code
   - Flesh out comments
-  -
 
 Future:
   - Full compatibility with the Chordii specification
