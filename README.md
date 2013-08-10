@@ -19,19 +19,19 @@ Milestone 0: Test data                 - COMPLETE
 
 Milestone 1: Initial functionality     - COMPLETE
   - Filter out inline chords from lyrics and print on their own line
-  - Chords designated by []
+  - Chords designated by `[]`
 
 Milestone 2: Document tag recognition  - IN PROGRESS
   - Recognize the following tags for documents:
-    {title:This Is a Title}        - short: t
-    {subtitle: This is a Subtitle} - short: st
-    {key: G}                       - short: k
-    {comment: This is a comment}   - short: c
+    `{title:This Is a Title}        - short: t`
+    `{subtitle: This is a Subtitle} - short: st`
+    `{key: G}                       - short: k`
+    `{comment: This is a comment}   - short: c`
 
 Milestone 3: Paragraph recognition
   - Only double-space paragraphs that contain chords
-  - Recognize {start_of_chorus} and {end_of_chorus} tags ({soc}/{eoc})
-  - Recognize even when mixed verbosity ({start_of_chorus}{eoc})
+  - Recognize `{start_of_chorus}` and `{end_of_chorus}` tags (`{soc}`/`{eoc}`)
+  - Recognize even when mixed verbosity (`{start_of_chorus}...{eoc}`)
   - Indent chorus blocks
 
 Milestone 4: Refactoring
@@ -47,4 +47,4 @@ Future:
   - Support for persistent 'library' of songs
   - Ability to import/export libraries
   - Library management via a GUI
-  - Allow non-indented chorus "header" via '{soc: Header}'
+  - Allow non-indented chorus "header" via `{soc: Header}`
