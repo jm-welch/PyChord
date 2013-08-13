@@ -1,48 +1,69 @@
 class Test():
-  class DBF():
-    tags = """
-{title: Drink Between Friends}
-{subtitle: The Highwaymen}
-{key: Dmix}
-"""
-    tags_short = """
-{t: Drink Between Friends}
-{st: The Highwaymen}
-{k: Dmix}
-"""
+  class WildRover():
 
     v1 = """
-Come and [D]join me, my friends, take a [C]seat by the [D]fire
-Fill your [D]glasses with whiskey, and [C]stay for a [G]while
-And if [D]you're of a humor to [C]be enter[D]tained
-Well, we'll [D]sing you a song, if you'll [C]join the re[G]frain
+I've [1]been a wild rover for many a [4]year
+And I [5]spent all my money on whiskey and [1]beer,
+And [1]now I'm returning with gold in great [4]store
+And I [5]never will play the wild rover no [1]more.
 """
-
-    cho = """
-Here's a [D]health to his-to-ry and one to mem-o-ry,
-And [C]here's to the [D]point where all [G]memory [A]ends
-[D]On the last cup, raise your glass, drink it up,
-For there's [C]nothing so [D]fine as a [G]drink between [D]friends
-"""
-
-    cho_tagged = '\n'.join(('{c: Chorus}','{soc}',cho,'{eoc}'))
 
     v2 = """
-Here's a health to the lusts and the loves of young life
-We'll drink once to McGregor, and twice to his wife
-Here's a health to the pleasures and pains of the year
-If you drink one to sorrow, drink two to good cheer
+I went in to an ale-house I used to frequent
+And I told the landlord that my money was spent.
+I asked him for credit, he answered me "Neigh!
+Such a custom as yours I could have any day."
 """
 
-    all = '\n'.join((v1,cho,v2))
-    all_tagged = '\n'.join((v1,cho_tagged,v2))
-    all_with_headers = '\n'.join((tags,v1,cho_tagged,v2))
-    all_with_short_headers = '\n'.join((tags_short,v1,cho_tagged,v2))
+    v3_4 = """
+{c:Chorus}
 
-  class HS():
-    v1 = """
-[1]Somebody's knockin' at the garden gate
-Hello, somebody, hello
-It's [4]Bully John and his dirty mate
-[1]Hello, [5]somebody, [1]hello
+I took from my pocket ten sovereigns bright
+And the landlord, his eyes opened wide with delight.
+He said "I have whiskey and wines of the best
+And the words that I spoke, they were only in jest."
+
+{c:Chorus}
+
+I'll go home to my parents, confess what I've done
+And I'll ask them to pardon their prodigal son.
+And if they forgive me as ofttimes before
+Sure I never will play the wild rover no more.
+
+{c:Chorus x2}
 """
+
+    chorus_plain = """
+And it's [5]no, nay, never,
+[1]No nay never no [4]more,
+Will I [1]play the wild [4]rover
+No [5]never no [1]more
+"""
+
+    chorus = """
+{c:Chorus}
+{soc}
+And it's [5]no, nay, never,
+[1]No nay never no [4]more,
+Will I [1]play the wild [4]rover
+No [5]never no [1]more
+{eoc}
+"""
+
+    header = """
+{title: Wild Rover}
+{st: trad.}
+"""
+
+    footer = """
+{key: G}
+"""
+
+    def __str__(self):
+      return self.header + '\n'.join([self.v1,
+                                      self.chorus,
+                                      self.v2,
+                                      self.v3_4,
+                                      self.footer])
+
+
