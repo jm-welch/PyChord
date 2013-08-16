@@ -7,6 +7,6 @@ Chord sheet parser, written in Python 3.x
 Description
 -----------
 
-This is designed to - eventually - replicate the Chordii parsing language, using Python as the backend.
+This is designed to - eventually - replicate the [Chordii](http://www.vromans.org/johan/projects/Chordii/) parsing language, using Python as the backend.
 
 I'm doing this as a way to learn more about Python outside of work, so some things may not wind up being possible, but I have high hopes.
