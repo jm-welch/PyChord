@@ -17,7 +17,8 @@ lib64
 # Project files
 .idea
 .project
-.psproj(ect)?
+*.psproj
+.psproject
 .pydevproject
 .nppproj
 
