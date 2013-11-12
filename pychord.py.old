@@ -1,0 +1,152 @@
+''' Python Chord Sheet parser
+
+Author : Jeremy Welch
+Link   : https://github.com/jm-welch/PyChord
+
+Notes:
+My goal is to make something roughly-equivalent to Chordii in Python.
+
+Chordii docs:
+  http://www.vromans.org/johan/projects/Chordii/documentation/chordii-4.2-user_guide.pdf
+'''
+
+
+from testdata import Test
+
+class Tags:
+  soc = ['start_of_chorus','soc']
+  eoc = ['end_of_chorus','eoc']
+  title = ['title', 't']
+  subtitle = ['subtitle', 'st']
+  comment = ['comment', 'c']
+
+
+class Song():
+
+  title = None
+  subtitle = None
+  key = None
+  output = None
+
+  def __init__(self, data_in):
+    self.raw = data_in
+    self.lines = self.raw.splitlines()
+    self.output = self.chord_sheet()
+
+  def parse_tags(self):
+    result = []
+
+    # For chorus formatting
+    indent = '     '
+    cho = False
+
+    for line in self.lines:
+      if '{' not in line:
+      # No tag in line
+        result.append('{}{}'.format(indent*cho,line))
+      else:
+      # Start of tag found in line
+        if line[-1] != '}':
+        # Tag unclosed - print an error
+          print('Error - unclosed tag on line {} of input: {}'.format(self.lines.index(line)+1, line))
+          break
+        else:
+        # Tag closed
+          line_split = line[1:-1].split(':',1)
+          tag = line_split[0].lower()
+
+
+        if tag in Tags.soc:         # Found Start of Chorus tag
+          cho = True
+        if tag in Tags.eoc:         # Found End of Chorus tag
+          cho = False
+        if tag in Tags.title:       # Found Title tag
+          self.title = line_split[1].lstrip()
+        if tag in Tags.subtitle:    # Found Subtitle tag
+          self.subtitle = line_split[1].lstrip()
+        if tag in Tags.comment:     # Found Comment tag
+          result.append(line_split[1])
+
+    self.lines = result
+
+  def paragraphs(self, lines):
+    ''' Break lines in to a list of paragraphs '''
+    # NTS: This currently includes comments with the following paragraph
+    # NTS: Should change this to handle tags and chords simultaneously to fix
+    retval = []
+    paragraph = []
+    for line in lines:
+      if not line:
+      # If line is blank
+        if paragraph:
+        # If paragraph already exists
+          retval.append('\n'.join(paragraph) + '\n')
+          paragraph = []
+        else:
+        # If paragraph does not already exist
+          retval.append(line)
+      else:
+      # If line is not blank
+        paragraph.append(line)
+
+    retval.append('\n'.join(paragraph))
+
+    # Returns list of paragraphs
+    return retval
+
+  def parse_chords(self):
+    def split_line(line):
+      ch_line, ly_line = '', ''
+      while '[' in line:
+        x = line.find('[')
+        y = line.find(']')
+        ch_line += '{0: >{1}}'.format(line[x+1:y],x if ch_line else x+1)
+        ly_line += line[0:x]
+        line = line[y+1:]
+
+      ly_line += line
+      return [ch_line, ly_line]
+
+    result = []
+    for paragraph in self.paragraphs(self.lines):
+      if '[' not in paragraph:
+      # Paragraph contains no chord markings
+        result.extend(paragraph.splitlines())
+      else:
+      # Paragraph contains chord markings
+        for line in paragraph.splitlines():
+          if line == '':
+          # Line is blank
+            result.append(line)
+          else:
+          # Line is not blank
+            result.extend(split_line(line))
+      result.append('')
+
+    return '\n'.join(result)
+
+  def chord_sheet(self):
+    output = []
+    self.parse_tags()
+
+    if self.title: output.append(self.title)
+    if self.subtitle: output.append(self.subtitle)
+    if self.key: output.append('Key: {}'.format(self.key))
+
+    output.append(self.parse_chords())
+
+    return '\n'.join(output)
+
+  def __str__(self):
+    return self.output
+
+def main():
+
+  global song
+  song = Song(str(Test.WildRover()))
+
+def gtfo():
+  exit()
+
+if __name__ == '__main__':
+  main()
