@@ -17,9 +17,12 @@ lib64
 # Project files
 .idea
 .project
-.psproject
+.psproj(ect)?
 .pydevproject
 .nppproj
 
 # Test script
 test.py
+
+# Output files
+*.chart
