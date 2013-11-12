@@ -14,28 +14,12 @@ develop-eggs
 lib
 lib64
 
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
-.coverage
-.tox
-nosetests.xml
+# Project files
+.idea
+.project
+.psproject
+.pydevproject
+.nppproj
 
 # Test script
 test.py
-
-# Misc
-*.cfg
-*.swp
-
-# C extensions
-*.so
-
-# Translations
-*.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
