@@ -39,3 +39,12 @@ test.py
 .mr.developer.cfg
 .project
 .pydevproject
+
+# PyScripter project file
+*.psproj
+
+# PyCharm project files
+.idea/
+
+# Output files
+*.chart
